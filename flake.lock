@@ -71,16 +71,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1787956436,
-        "narHash": "sha256-Gp3UoX66if4hnCZ2IILWuemne2kt11xE/P2GKLo8fLI=",
+        "lastModified": 1787956453,
+        "narHash": "sha256-PvDKsVHlszwRpQZ+LiHgdNofmbTdbeuq4hKyZpf+fOg=",
         "owner": "jgus",
         "repo": "pydantic-core-flake",
-        "rev": "026715852d491e937c4c6e334cb530b3b5f29e1d",
+        "rev": "fe3bdf0229826538df98d04e517a0d555cb83461",
         "type": "github"
       },
       "original": {
         "owner": "jgus",
-        "ref": "v2.46.4",
+        "ref": "v2.47.0",
         "repo": "pydantic-core-flake",
         "type": "github"
       }
