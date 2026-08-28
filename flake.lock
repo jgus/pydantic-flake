@@ -58,11 +58,39 @@
         "type": "github"
       }
     },
+    "pydantic-core": {
+      "inputs": {
+        "flake-lib": [
+          "flake-lib"
+        ],
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787956436,
+        "narHash": "sha256-Gp3UoX66if4hnCZ2IILWuemne2kt11xE/P2GKLo8fLI=",
+        "owner": "jgus",
+        "repo": "pydantic-core-flake",
+        "rev": "026715852d491e937c4c6e334cb530b3b5f29e1d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jgus",
+        "ref": "v2.46.4",
+        "repo": "pydantic-core-flake",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-lib": "flake-lib",
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "pydantic-core": "pydantic-core"
       }
     },
     "systems": {

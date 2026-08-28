@@ -9,14 +9,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
+    pydantic-core = {
+      url = "github:jgus/pydantic-core-flake/v2.46.4";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.flake-lib.follows = "flake-lib";
+    };
   };
 
-  outputs = { nixpkgs, flake-utils, flake-lib, ... }:
+  outputs = { nixpkgs, flake-utils, flake-lib, pydantic-core, ... }:
     let
       pin = import ./pin.nix;
       inherit (pin) version hash;
       source = { type = "pypi"; pname = "pydantic"; format = "sdist"; };
-      overlay = final: prev: {
+      pydanticOverlay = final: prev: {
         pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
           (pyfinal: pyprev: {
             pydantic = pyprev.pydantic.overridePythonAttrs (_: {
@@ -28,6 +34,10 @@
           })
         ];
       };
+      overlay = nixpkgs.lib.composeManyExtensions [
+        pydantic-core.overlays.default
+        pydanticOverlay
+      ];
     in
     flake-utils.lib.eachDefaultSystem
       (system:
@@ -41,8 +51,27 @@
           packages = {
             pydantic = pkgs.python3.pkgs.pydantic;
             default = pkgs.python3.pkgs.pydantic;
-            update-version = flake-lib.lib.mkUpdateVersion { inherit pkgs source; buildAttr = "pydantic"; };
-            update-branches = flake-lib.lib.mkUpdateBranches { inherit pkgs source; pinSchema = "pypi"; };
+            update-version = flake-lib.lib.mkUpdateVersion {
+              inherit pkgs source;
+              buildAttr = "pydantic";
+              siblings = [
+                {
+                  reqName = "pydantic-core";
+                  pypiName = "pydantic-core";
+                  flakeRepo = "jgus/pydantic-core-flake";
+                  mode = "exact";
+                }
+              ];
+            };
+            update-branches = flake-lib.lib.mkUpdateBranches {
+              inherit pkgs source;
+              pinSchema = "pypi";
+              branchOwnedFiles = [
+                "pin.nix"
+                "flake.lock"
+                "flake.nix"
+              ];
+            };
           };
         }) // {
       overlays.default = overlay;
