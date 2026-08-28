@@ -10,7 +10,7 @@
       inputs.flake-utils.follows = "flake-utils";
     };
     pydantic-core = {
-      url = "github:jgus/pydantic-core-flake/v2.46.4";
+      url = "github:jgus/pydantic-core-flake/v2.46.5";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
       inputs.flake-lib.follows = "flake-lib";
