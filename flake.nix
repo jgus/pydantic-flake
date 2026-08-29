@@ -10,7 +10,7 @@
       inputs.flake-utils.follows = "flake-utils";
     };
     pydantic-core = {
-      url = "github:jgus/pydantic-core-flake/v2.46.4";
+      url = "github:jgus/pydantic-core-flake";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
       inputs.flake-lib.follows = "flake-lib";
@@ -62,15 +62,11 @@
                   mode = "exact";
                 }
               ];
+              siblingRefsInPin = true;
             };
             update-branches = flake-lib.lib.mkUpdateBranches {
               inherit pkgs source;
               pinSchema = "pypi";
-              branchOwnedFiles = [
-                "pin.nix"
-                "flake.lock"
-                "flake.nix"
-              ];
             };
           };
         }) // {
